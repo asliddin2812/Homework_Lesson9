@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <a href="{% url 'student_detail' full_name=student.full_name %}" class="card-link">{{ student.full_name }}</a>
+
+{% endblock %}

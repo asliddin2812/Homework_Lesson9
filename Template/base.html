@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+    	Bosh sahifa
+    {% endblock %}</title>
+    <style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+  }
+
+  .constrain {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+
+  .card-nav {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    padding: 20px 25px;
+    transition: transform 0.2s ease;
+  }
+
+  .card-nav:hover {
+    transform: translateY(-2px);
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0d6efd;
+    margin-bottom: 15px;
+  }
+
+  .nav-link {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    padding: 10px 18px;
+    background-color: #0d6efd;
+    color: white !important;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    background-color: #0b5ed7;
+  }
+</style>
+
+</head>
+<body>
+
+    {% block content %}
+        <div class="constrain">
+            <div class="card-nav">
+                <div class="card-title">Teacher</div>
+                <a class="nav-link" href="{% url 'teacher_list' %}">Teacher List</a>
+                <a class="nav-link" href="{% url 'created_' %}">Add Teacher</a>
+            </div>
+
+            <div class="card-nav">
+                <div class="card-title">Students</div>
+                <a class="nav-link" href="{% url 'student_list' %}">Student List</a>
+                <a class="nav-link" href="{% url 'created' %}">Add Student</a>
+            </div>
+
+            <div class="card-nav">
+                <div class="card-title">Feedback</div>
+                <a class="nav-link" href="{% url 'feedback_list' %}">Feedback List</a>
+                <a class="nav-link" href="{% url 'create' %}">Add Feedback</a>
+            </div>
+        </div>
+
+    {% endblock %}
+</body>
+</html>

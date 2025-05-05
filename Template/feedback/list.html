@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	feedback
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for feedback in feedback_list %}
+        <div class="card">
+            <div class="card-header">
+                <h1>Feedback</h1>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                        student name: {{ feedback.student_name }}
+                </h5>
+                <p class="card-text">message: {{ feedback.message }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

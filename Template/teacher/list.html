@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	teacher
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for teacher in teacher_list %}
+        <div class="card">
+            <div class="card-header">
+                <h1>Teacher</h1>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                        Teacher name: {{ teacher.name }}
+                </h5>
+                <p class="card-text">email: {{ teacher.email }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

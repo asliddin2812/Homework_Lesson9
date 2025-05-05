@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	student
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for student in student_list %}
+        <div class="card">
+            <div class="card-header">
+                <h1>Student</h1>
+            </div>
+            <div class="card-body">
+                <h5 class="card-text">
+                    full_name: {{ student.full_name }}
+                </h5>
+                <p class="card-text">marks: {{ student.marks }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
