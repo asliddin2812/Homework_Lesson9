@@ -10,8 +10,8 @@ class Teacher(models.Model):
 
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    experience_year = models.IntegerField()
-    subject = models.CharField(max_length=100, choices=subject_choice)
+    experience_year = models.FloatField()
+    subject = models.CharField(max_length=100, choices=subject_choice,null=True,blank=True)
 
     def __str__(self):
         return self.name

@@ -9,7 +9,7 @@ class Student(models.Model):
     marks = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.full_name + ' ' + str(self.grade)
+        return self.full_name + ' ' + str(self.marks)
 
     class Meta:
         db_table = 'student'

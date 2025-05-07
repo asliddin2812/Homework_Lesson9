@@ -1,39 +1,26 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.shortcuts import render, redirect
+from .forms import TeacherForm
 
 from .models import Teacher
 # Create your views here.
 
 def index(request):
-    return render(request,'base.html')
+    return render(request,'home.html')
 
-class TeacherListView(ListView):
-    model = Teacher
-    template_name = 'teacher/list.html'
-    context_object_name = 'teacher_list'
+def teacher_list(request):
+    teacher_list = Teacher.objects.all()
+    return render(request,'teacher/list.html',{'teacher_list':teacher_list})
 
+def teacher_create(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('teacher_list')
+    else:
+        form = TeacherForm()
+    return render(request,'teacher/add.html',{'form':form})
 
-class TeacherCreateView(CreateView):
-    model = Teacher
-    template_name = 'teacher/add.html'
-    fields = ['name','email','experience_year', 'subject']
-    success_url = reverse_lazy('created_')
-
-
-class TeacherDetailView(DetailView):
-    model = Teacher
-    template_name = 'teacher/detail.html'
-    context_object_name = 'teacher'
-
-    def get_object(self):
-
-        return Teacher.objects.filter(name=self.kwargs['name']).first()
-
-class TeacherDetail(DetailView):
-    model = Teacher
-    template_name = 'teacher/detail1.html'
-    context_object_name = 'teachers'
-
-    def get_object(self):
-        return Teacher.objects.filter(email=self.kwargs['email']).first()
+def teacher_detail(request, name):
+    teacher = Teacher.objects.get(name=name)
+    return render(request,'teacher/detail.html',{'teacher':teacher})

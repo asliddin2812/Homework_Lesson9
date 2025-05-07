@@ -1,7 +1,0 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-
-    <a href="{% url 'feedbacks' message=feedback.message %}" class="card-link">{{ feedback.message }}</a>
-
-{% endblock %}

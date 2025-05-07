@@ -1,39 +1,24 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
-
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student
-# Create your views here.
+from .forms import StudentForm
 
 def index(request):
-    return render(request,'base.html')
+    return render(request, 'base.html')
 
-class StudentListView(ListView):
-    model = Student
-    template_name = 'student/list.html'
-    context_object_name = 'student_list'
+def student_list(request):
+    student_list = Student.objects.all()
+    return render(request, 'student/list.html', {'student_list': student_list})
 
+def student_create(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+    else:
+        form = StudentForm()
+    return render(request, 'student/add.html', {'form': form})
 
-class StudentCreateView(CreateView):
-    model = Student
-    template_name = 'student/add.html'
-    fields = ['full_name','grade','is_active', 'marks']
-    success_url = reverse_lazy('created')
-
-
-class StudentDetailView(DetailView):
-    model = Student
-    template_name = 'student/detail.html'
-    context_object_name = 'student'
-
-    def get_object(self):
-
-        return Student.objects.filter(full_name=self.kwargs['full_name']).first()
-
-class StudentDetail(DetailView):
-    model = Student
-    template_name = 'student/detail1.html'
-    context_object_name = 'students'
-
-    def get_object(self):
-        return Student.objects.filter(marks=self.kwargs['marks']).first()
+def student_detail(request, full_name):
+    student = Student.objects.filter(full_name=full_name).first()
+    return render(request, 'student/detail.html', {'student': student})
